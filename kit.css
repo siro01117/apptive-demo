@@ -1,0 +1,90 @@
+/* EZ.KIT 공통 토큰 — design/TONE.md "라임 대시보드" (2026-10-22).
+   흰 화면 + 옅은 회색 칸, 검은 버튼, 라임 포인트(지금 위치 · 켜짐 · 가장 중요한 것 하나).
+   새 모듈은 이걸 먼저 불러오고, 스크립트에서 /shell/kit.js 를 import 해 밝은/다크 설정을 따른다.
+   --acc(라임) 위 글자는 --on-acc, --fg(검정) 버튼 위 글자는 --on-fg. */
+:root {
+  --bg: #FFFFFF;
+  --card: #F4F4F2;
+  --line: #E3E3E0;
+  --fg: #1C1C1E;
+  --on-fg: #FFFFFF;
+  --dim: #86868B;
+  --faint: #B5B5BA;
+  --acc: #D4F24A;
+  --on-acc: #1C1C1E;
+  --acc-soft: rgba(212, 242, 74, .28);
+  --danger: #E5484D;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .06);
+  --r: 14px;
+  --r-lg: 24px;
+  color-scheme: light;
+}
+/* 다크: TONE 색을 뒤집는다. 설정 theme 가 없으면 Windows 테마(prefers-color-scheme), 있으면 kit.js 가 data-theme 를 붙인다 */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E0E0E; --card: #181818; --line: #2A2A2C; --fg: #F2F2F2; --on-fg: #0E0E0E;
+    --dim: #8E8E93; --faint: #4A4A4E; --acc-soft: rgba(212, 242, 74, .16); --danger: #F0686C;
+    --shadow: none; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E0E0E; --card: #181818; --line: #2A2A2C; --fg: #F2F2F2; --on-fg: #0E0E0E;
+  --dim: #8E8E93; --faint: #4A4A4E; --acc-soft: rgba(212, 242, 74, .16); --danger: #F0686C;
+  --shadow: none; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: "Noto Sans KR", Pretendard, "Malgun Gothic", system-ui, sans-serif; font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+[hidden] { display: none !important; }
+button, input, select { font: inherit; color: inherit; }
+svg.i { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; }
+
+/* 버튼: 기본은 테두리, 주 버튼은 검정 + 라임 화살표 */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 40px; padding: 0 16px; border-radius: 12px; border: 1px solid var(--line);
+  background: var(--bg); color: var(--fg); cursor: pointer; white-space: nowrap;
+}
+.btn:hover { border-color: var(--faint); }
+.btn:disabled { opacity: .45; cursor: default; }
+.btn.primary { background: var(--fg); border-color: var(--fg); color: var(--on-fg); font-weight: 700; }
+.btn.primary:hover { opacity: .9; }
+.btn.primary .arrow { color: var(--acc); }
+.btn.ghost { background: transparent; border-color: transparent; color: var(--dim); }
+.btn.ghost:hover { color: var(--fg); }
+.btn.icon { width: 32px; height: 32px; padding: 0; border-radius: 9px; }
+
+/* 둘 중 하나 고르기: 회색 틀 안에 고른 것만 흰 칸 */
+.seg { display: inline-flex; padding: 3px; gap: 2px; border-radius: 12px; background: var(--card); }
+.seg button { border: 0; background: transparent; color: var(--dim); height: 32px; padding: 0 14px; border-radius: 9px; cursor: pointer; }
+.seg button:hover { color: var(--fg); }
+.seg button.on { background: var(--bg); color: var(--fg); font-weight: 600; box-shadow: var(--shadow); }
+
+/* 켜기/끄기: 켜짐 = 검정 바탕 + 라임 손잡이 */
+.switch { position: relative; width: 48px; height: 28px; border-radius: 14px; border: 0; padding: 0; cursor: pointer; background: var(--line); flex: 0 0 auto; transition: background .15s; }
+.switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: var(--bg); transition: left .15s, background .15s; }
+.switch[aria-checked="true"] { background: var(--fg); }
+.switch[aria-checked="true"]::after { left: 23px; background: var(--acc); }
+:root[data-theme="dark"] .switch[aria-checked="true"] { background: #2E2E30; }
+
+/* 위 알약: [● EZ.KIT] 모듈 이름 */
+.appbar { display: flex; align-items: center; justify-content: space-between; }
+.crumb { display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px 4px 4px; border: 1px solid var(--line); border-radius: 999px; font-size: 12px; color: var(--dim); }
+.crumb b { display: inline-flex; align-items: center; gap: 7px; height: 26px; padding: 0 12px 0 8px; border-radius: 999px; background: var(--fg); color: var(--on-fg); font-weight: 700; font-size: 12px; letter-spacing: .02em; }
+.crumb b::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--acc); }
+.circle-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--dim); display: grid; place-items: center; cursor: pointer; padding: 0; }
+.circle-btn:hover { color: var(--fg); }
+.circle-btn .sun { display: none; }
+:root[data-theme="dark"] .circle-btn .sun { display: block; }
+:root[data-theme="dark"] .circle-btn .moon { display: none; }
+
+:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+
+/* 다크: 흰 바탕 위 라임은 안 보이므로, 주 버튼 · 고른 칩은 라임 바탕 + 검정 글자 */
+:root[data-theme="dark"] .btn.primary { background: var(--acc); border-color: var(--acc); color: var(--on-acc); }
+:root[data-theme="dark"] .btn.primary .arrow { color: var(--on-acc); }

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round">
+  <!-- 자리 표시용 견본. 실제 그림은 시각자료 세션의 도트 SVG/GIF 로 바꾼다. -->
+  <circle cx="44" cy="62" r="12"/><circle cx="74" cy="48" r="12"/><circle cx="44" cy="100" r="12"/><circle cx="74" cy="114" r="12"/>
+  <path d="M104 81h40"/><path d="M136 73l10 8-10 8"/>
+  <circle cx="188" cy="81" r="24" stroke="#FFD84D" stroke-width="3"/>
+  <path d="M188 40v-10M188 132v-10M147 81h-10M229 81h10M159 52l-7-7M217 110l7 7M217 52l7-7M159 110l-7 7" stroke="#FFD84D" opacity=".7"/>
+  <text x="59" y="150" fill="#FFFFFF" font-size="12" text-anchor="middle" stroke="none" opacity=".7">수소 ×4</text>
+  <text x="188" y="150" fill="#FFD84D" font-size="12" text-anchor="middle" stroke="none">헬륨 ×1</text>
+</svg>

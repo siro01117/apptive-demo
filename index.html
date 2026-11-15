@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>APPTIVE 체험</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="kit.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<header class="top">
+  <button id="back" class="circle-btn" title="뒤로" hidden>
+    <svg class="i" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+  </button>
+  <span class="crumb"><b>EZ.KIT</b></span>
+  <div class="right">
+    <button id="reload" class="circle-btn" hidden title="새로 고침 (R)">
+      <svg class="i" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg>
+    </button>
+    <button id="open-dir" class="circle-btn" hidden title="콘텐츠 폴더 열기">
+      <svg class="i" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+    </button>
+    <button id="reset" class="circle-btn" title="진행 초기화 (밝힌 별 · 점수 지우기)">
+      <svg class="i" viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- 1. 별자리 목록 -->
+<main id="home" class="view list"></main>
+
+<!-- 2. 별(레슨) 목록 -->
+<main id="cons" class="view cons" hidden>
+  <aside class="side"><ol id="c-list" class="screens"></ol></aside>
+  <section id="c-body" class="list"></section>
+  <aside class="side spacer"></aside>
+</main>
+
+<!-- 3. 학습 플레이어 -->
+<main id="play" class="view play" hidden>
+  <aside class="side">
+    <ol id="p-list" class="screens"></ol>
+  </aside>
+  <section class="stagewrap">
+    <div id="phone" class="phone"><div id="screen" class="screen"></div></div>
+  </section>
+  <aside class="side spacer"></aside>
+</main>
+
+<div id="toast" class="toast" hidden></div>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

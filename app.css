@@ -1,0 +1,66 @@
+/* APPTIVE 렌더러. 바깥(홈 · 목록 · 사이드)은 EZ.KIT 토큰.
+   폰 안(.screen)은 FigCraft "14 레슨 v5 와프" 좌표 · 글자 · 색을 app.js 가 그대로 그린다 — 여기엔 폰 안 스타일을 두지 않는다. */
+body { display: flex; flex-direction: column; height: 100%; overflow: hidden; }
+.top { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 14px 20px; border-bottom: 1px solid var(--line); flex: 0 0 auto; }
+.top #back { justify-self: start; }
+.top .crumb { grid-column: 2; padding: 0; border: 0; }
+.top .crumb b { background: transparent; color: var(--fg); padding: 0; font-size: 14px; letter-spacing: .04em; }
+.top .crumb b::before { display: none; }
+.top .right { grid-column: 3; justify-self: end; display: flex; gap: 8px; }
+.view { flex: 1 1 auto; min-height: 0; overflow: auto; }
+
+/* ---- 1 · 2. 이름만 있는 가운데 목록 */
+.list { display: flex; flex-direction: column; align-items: center; padding: 48px 24px; gap: 2px; }
+.list h1 { font-size: 26px; margin: 0 0 32px; padding-bottom: 20px; width: min(420px, 100%); text-align: center; border-bottom: 1px solid var(--line); }
+.row { width: min(420px, 100%); text-align: center; padding: 14px 16px; border-radius: 12px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+.row:hover { background: var(--card); }
+.row .no { color: var(--dim); font-size: 12px; font-variant-numeric: tabular-nums; min-width: 22px; text-align: right; }
+.row .no.done { color: var(--fg); font-weight: 700; }
+.row .bar { width: 1px; height: 18px; background: var(--line); flex: 0 0 auto; }
+#c-body .row, #home .row { font-size: 20px; padding: 18px 16px; }
+#home .row { font-weight: 700; }
+#c-body .row .no, #home .row .no { font-size: 14px; }
+.row .star { width: 16px; height: 16px; flex: 0 0 auto; }
+.row .star path { fill: var(--line); }
+.row .star.lit path { fill: #E9C13A; }
+.row.err { color: var(--danger); cursor: default; }
+.cons { display: grid; grid-template-columns: 220px 1fr 220px; grid-template-rows: minmax(0, 1fr); height: 100%; overflow: hidden; }
+.cons .list { overflow: auto; }
+.empty { padding: 60px 0; text-align: center; color: var(--dim); display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.empty b { color: var(--fg); font-size: 16px; }
+.empty code { background: var(--card); padding: 4px 8px; border-radius: 6px; }
+
+/* ---- 3. 플레이어 (바깥) */
+.play { display: grid; grid-template-columns: 220px 1fr 220px; grid-template-rows: minmax(0, 1fr); height: 100%; min-height: 0; overflow: hidden; }
+.side { padding: 16px; overflow: auto; font-size: 15px; border-right: 1px solid var(--line); }
+.side.spacer { border-right: 0; border-left: 1px solid var(--line); }
+.side.spacer { visibility: hidden; }
+.screens { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.screens li { display: grid; grid-template-columns: 28px 1fr; gap: 8px; padding: 9px 8px; border-radius: 8px; cursor: pointer; color: var(--dim); }
+.screens li:hover { background: var(--card); }
+.screens li.on { color: var(--fg); font-weight: 600; }
+.screens li .no { color: var(--dim); font-variant-numeric: tabular-nums; font-size: 13px; }
+.screens li.sec { display: block; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); border-radius: 0; color: var(--fg); font-weight: 700; cursor: default; }
+.screens li.sec:first-child { margin-top: 0; padding-top: 6px; border-top: 0; }
+.screens li.sec:hover { background: transparent; }
+.stagewrap { display: grid; place-items: center; padding: 20px; overflow: hidden; background: var(--card); }
+
+/* 폰 틀: 와프 프레임 402×874, 창 높이에 맞춰 zoom */
+.phone { width: 402px; height: 874px; background: #FFFFFF; border-radius: 0; overflow: hidden; position: relative; box-shadow: 0 0 0 1px #D4D4D4; }
+.screen { position: absolute; inset: 0; color: #111111; font-family: "Noto Sans KR", "Malgun Gothic", sans-serif; }
+.screen * { box-sizing: border-box; }
+.screen .n { position: absolute; margin: 0; white-space: pre-wrap; word-break: keep-all; }
+.screen .hit { position: absolute; cursor: pointer; background: transparent; border: 0; padding: 0; }
+.screen img.n { object-fit: contain; }
+.screen input.n { border: 0; outline: 0; background: transparent; font: inherit; color: #111111; padding: 0; }
+/* 슬라이더의 보이지 않는 range: 엄지를 44px 로 맞춰 이동 범위가 그려진 트랙(40~362)과 정확히 겹치게 */
+.screen input[type=range].n { -webkit-appearance: none; appearance: none; margin: 0; }
+.screen input[type=range].n::-webkit-slider-runnable-track { height: 44px; background: transparent; }
+.screen input[type=range].n::-webkit-slider-thumb { -webkit-appearance: none; width: 44px; height: 44px; background: transparent; border: 0; }
+.screen .nowf { position: absolute; left: 24px; top: 100px; font-size: 11px; color: #C0392B; }
+
+/* 모션: 나레이션 반짝임 깜빡임 (나머지 움직임은 app.js 의 Web Animations) */
+@keyframes blink { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.7); } }
+.screen .blink { animation: blink 1.4s ease-in-out infinite; }
+
+.toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--fg); color: var(--on-fg); padding: 10px 16px; border-radius: 12px; font-size: 13px; z-index: 9; }

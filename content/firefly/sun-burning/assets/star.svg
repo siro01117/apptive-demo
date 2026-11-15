@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round">
+  <!-- 자리 표시용 견본: 별 하나 크게, 중심은 노랑. -->
+  <circle cx="120" cy="90" r="46"/>
+  <circle cx="120" cy="90" r="14" stroke="#FFD84D" stroke-width="3"/>
+  <path d="M120 26v-14M120 168v-14M56 90H42M198 90h14M75 45l-10-10M165 135l10 10M165 45l10-10M75 135l-10 10" opacity=".6"/>
+  <circle cx="30" cy="30" r="1.5" fill="#fff" stroke="none"/><circle cx="210" cy="40" r="1.5" fill="#fff" stroke="none"/><circle cx="40" cy="150" r="1.5" fill="#fff" stroke="none"/><circle cx="215" cy="150" r="1.5" fill="#fff" stroke="none"/>
+</svg>
