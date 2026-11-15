@@ -64,3 +64,14 @@ body { display: flex; flex-direction: column; height: 100%; overflow: hidden; }
 .screen .blink { animation: blink 1.4s ease-in-out infinite; }
 
 .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--fg); color: var(--on-fg); padding: 10px 16px; border-radius: 12px; font-size: 13px; z-index: 9; }
+
+/* 모바일(체험판 전용): 옆 목록 없이 가운데 목록만, 레슨에 들어가면 폰 화면만 꽉 차게 */
+@media (max-width: 760px) {
+  html, body { height: 100%; height: 100dvh; }
+  .cons, .play { grid-template-columns: 1fr; }
+  .side { display: none; }
+  body:has(#play:not([hidden])) .top { display: none; }
+  .stagewrap { padding: 0; background: #FFFFFF; }
+  .phone { box-shadow: none; }
+  .list { padding: 28px 16px; }
+}

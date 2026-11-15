@@ -129,7 +129,7 @@ function renderList() {
 }
 const KIND_KO = { ox: 'O/X', single: '하나 고르기', multi: '여러 개 고르기', blank: '빈칸', slider: '슬라이더', match: '짝 맞추기', chosung: '초성', audio: '소리 듣고 고르기' };
 function labelOf(s) { if (s.type === 'quiz') return KIND_KO[s.kind] || ('퀴즈 ' + s.kind); return ({ narration: '나레이션', concept: '새 개념' })[s.type] || s.type; }
-function fitPhone() { const wrap = $('.stagewrap'); const ph = $('#phone'); ph.style.zoom = Math.min(1, (wrap.clientHeight - 40) / H, (wrap.clientWidth - 40) / W); }
+function fitPhone() { const wrap = $('.stagewrap'); const ph = $('#phone'); const m = matchMedia('(max-width: 760px)').matches; ph.style.zoom = m ? Math.min(wrap.clientHeight / H, wrap.clientWidth / W) : Math.min(1, (wrap.clientHeight - 40) / H, (wrap.clientWidth - 40) / W); }
 window.addEventListener('resize', fitPhone);
 // 화면을 옮길 때 앞 화면의 선택 · 입력을 지운다 (안 지우면 다음 퀴즈에 앞 선택이 미리 골라져 보인다)
 function clearScreenState() {
